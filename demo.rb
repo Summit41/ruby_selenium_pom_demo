@@ -4,6 +4,7 @@ require_relative './page_objects/login_page'
 require_relative './page_objects/register_page'
 require_relative './page_objects/home_page'
 require_relative './page_objects/add_contact_page'
+require_relative './page_objects/contact_details_page'
 require 'date'
 
 # Test Data
@@ -26,10 +27,10 @@ _country = 'United States of America'
 @url = "https://thinking-tester-contact-list.herokuapp.com/login"
 
 @driver.get(@url)
-@driver.manage.timeouts.implicit_wait = 30
+@driver.manage.timeouts.implicit_wait = 10
+@wait = Selenium::WebDriver::Wait.new(timeout: 10)
 
-@wait = wait = Selenium::WebDriver::Wait.new(:timeout => 7)
-
+# Create a new User
 @login_page = LoginPage.new(@driver)
 @login_page.fill_data(:REGISTER, true)
 
@@ -42,6 +43,7 @@ _country = 'United States of America'
 
 puts("#{_email} : #{_password}")
 
+# Add a new contact
 @home_page = HomePage.new(@driver)
 @home_page.fill_data(:ADD_CONTACT, true)
 
@@ -59,6 +61,23 @@ puts("#{_email} : #{_password}")
 @add_contact_page.fill_data(:COUNTRY, _country)
 
 @add_contact_page.fill_data(:SUBMIT, true)
+
+# Log out
+@home_page.fill_data(:LOG_OUT, true)
+
+# Log in
+@driver.get(@url)
+@login_page.fill_data(:EMAIL, _email)
+@login_page.fill_data(:PASSWORD, _password)
+@login_page.fill_data(:LOGIN, true)
+
+contact_link = @home_page.find_contact(_email)
+contact_link.click()
+
+@contact_details_page = ContactDetailsPage.new(@driver)
+@contact_details_page.delete_contact
+
+@home_page.fill_data(:LOG_OUT, true)
 
 
 

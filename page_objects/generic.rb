@@ -47,7 +47,12 @@ class PageObject
 
         # Find Field
         field = @driver.find_element(field_locator_by, field_locator_value)
-
+        
+        if field.nil?
+            puts("ERROR: Unable to find element #{field} using find_element(#{field_locator_by}, #{field_locator_value})")
+            return false
+        end
+        
         # Fill Field
         if field_type == 'text'
             field.send_keys(value)

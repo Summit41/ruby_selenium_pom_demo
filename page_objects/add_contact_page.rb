@@ -16,5 +16,5 @@ class AddContactPage < PageObject
     SUBMIT = ObjectRef.new(:id, 'submit', 'button')
     CANCEL = ObjectRef.new(:id, 'cancel', 'button')
 
-    LOG_OUT = ObjectRef.new(:id, 'cancel', 'button')
+    LOG_OUT = ObjectRef.new(:id, 'logout', 'button')
 end
