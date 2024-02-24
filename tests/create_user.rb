@@ -8,7 +8,7 @@ require 'date'
 _timestamp = DateTime.now.strftime("%Y%m%d%H%M%S")
 _first_name = 'Test'
 _last_name = 'Testerson'
-_email = "test#{_timestamp}@email.com"
+_email = "test+#{_timestamp}@email.com"
 _password = _timestamp
 
 describe 'Contacts App - Register' do
