@@ -29,8 +29,85 @@ class APICall
     def execute()
         if @request_type == :post
             begin
-                # Make a POST request
                 response = RestClient.post(@url, @data.to_json, @headers)
+            
+                return response
+            rescue RestClient::ExceptionWithResponse => e
+                # Handle HTTP errors
+                puts "Error: #{e.message}, Response: #{e.response.body}"
+                return e.response
+            rescue StandardError => e
+                # Handle other errors
+                puts "Error: #{e.message}"
+            end
+        elsif @request_type == :get
+            begin
+                response = RestClient.get(@url, @headers)
+            
+                return response
+            rescue RestClient::ExceptionWithResponse => e
+                # Handle HTTP errors
+                puts "Error: #{e.message}, Response: #{e.response.body}"
+                return e.response
+            rescue StandardError => e
+                # Handle other errors
+                puts "Error: #{e.message}"
+            end
+        elsif @request_type == :patch
+            begin
+                response = RestClient.patch(@url, @data.to_json, @headers)
+            
+                return response
+            rescue RestClient::ExceptionWithResponse => e
+                # Handle HTTP errors
+                puts "Error: #{e.message}, Response: #{e.response.body}"
+                return e.response
+            rescue StandardError => e
+                # Handle other errors
+                puts "Error: #{e.message}"
+            end
+        elsif @request_type == :put
+            begin
+                response = RestClient.put(@url, @data.to_json, @headers)
+            
+                return response
+            rescue RestClient::ExceptionWithResponse => e
+                # Handle HTTP errors
+                puts "Error: #{e.message}, Response: #{e.response.body}"
+                return e.response
+            rescue StandardError => e
+                # Handle other errors
+                puts "Error: #{e.message}"
+            end
+        elsif @request_type == :delete
+            begin
+                response = RestClient.delete(@url, @headers)
+            
+                return response
+            rescue RestClient::ExceptionWithResponse => e
+                # Handle HTTP errors
+                puts "Error: #{e.message}, Response: #{e.response.body}"
+                return e.response
+            rescue StandardError => e
+                # Handle other errors
+                puts "Error: #{e.message}"
+            end
+        elsif @request_type == :head
+            begin
+                response = RestClient.head(@url, @headers)
+            
+                return response
+            rescue RestClient::ExceptionWithResponse => e
+                # Handle HTTP errors
+                puts "Error: #{e.message}, Response: #{e.response.body}"
+                return e.response
+            rescue StandardError => e
+                # Handle other errors
+                puts "Error: #{e.message}"
+            end
+        elsif @request_type == :options
+            begin
+                response = RestClient.options(@url, @headers)
             
                 return response
             rescue RestClient::ExceptionWithResponse => e

@@ -46,7 +46,7 @@ end
 describe 'Contacts App - Register API' do
     after(:each) do
         users_api = UsersAPI.new()
-        users_api.logout(@auth_token)
+        users_api.log_out_user(@auth_token)
     end
 
     it 'should register a new user' do
@@ -56,7 +56,7 @@ describe 'Contacts App - Register API' do
         _password = _password + "_api"
 
         users_api = UsersAPI.new()
-        response = users_api.register(_first_name, _last_name, _email, _password)
+        response = users_api.add_user(_first_name, _last_name, _email, _password)
 
         @auth_token = response.body.match(/"token":"([^"]*)"/)[1]
 

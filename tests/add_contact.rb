@@ -69,13 +69,13 @@ describe 'Contacts App - Add Contact API' do
     before(:each) do
         users_api = UsersAPI.new()
         
-        response = users_api.login()
+        response = users_api.log_in_user()
         @auth_token = response.body.match(/"token":"([^"]*)"/)[1]
     end
 
     after(:each) do
         users_api = UsersAPI.new()
-        users_api.logout(@auth_token)
+        users_api.log_out_user(@auth_token)
     end
 
     it 'should add a new contact via api'  do

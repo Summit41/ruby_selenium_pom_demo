@@ -36,13 +36,13 @@ end
 describe 'Contacts App - Login API' do
     after(:each) do
         users_api = UsersAPI.new()
-        users_api.logout(@auth_token)
+        users_api.log_out_user(@auth_token)
     end
 
     it 'should log in as an existing user' do
         users_api = UsersAPI.new()
         
-        response = users_api.login()
+        response = users_api.log_in_user()
 
         @auth_token = response.body.match(/"token":"([^"]*)"/)[1]
         
