@@ -1,7 +1,7 @@
 require 'selenium-webdriver'
 require 'rspec'
 require_relative '../page_objects/login_page'
-require_relative '../helpers/api_helper'
+require_relative '../api_objects/users'
 require 'date'
 
 # Test Data
@@ -34,20 +34,18 @@ describe 'Contacts App - Login UI' do
 end
 
 describe 'Contacts App - Login API' do
+    after(:each) do
+        users_api = UsersAPI.new()
+        users_api.logout(@auth_token)
+    end
 
     it 'should log in as an existing user' do
-
-        url = 'https://thinking-tester-contact-list.herokuapp.com/users/login'
+        users_api = UsersAPI.new()
         
-        # Prepare the request data
-        data = {
-            'email': _email,
-            'password': _password
-        }
-        
-        post_login = APICall.new(url, data, :post, {})
-        response = post_login.execute
+        response = users_api.login()
 
+        @auth_token = response.body.match(/"token":"([^"]*)"/)[1]
+        
         # TEST - Did we receive a 2xx response code?
         expect(response.code.to_i).to be_between(200, 299).inclusive
 
