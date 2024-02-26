@@ -5,11 +5,16 @@ This is a simple proof-of-concept library showing an example of how to develop a
 
 #### Repo Demo
 
-Use the folowing command to run the demo:
+Use the folowing commands to run the demo files:
 ```
-ruby demo.rb
+ruby ./demos/ui_demo.rb
+ruby ./demos/contacts_api_demo.rb
+ruby ./demos/users_api_demo.rb
 ```
-The demo covers the basic ui functionality which will be executed by the tests in the ./tests/ directory
+These demos cover the basic functionality which will be executed by the tests in the ./tests/ directory:
+* UI Demo: Performs most of the available actions via the UI
+* Contacts API Demo: Adds, Gets, Edits, and Deletes Contacts
+* Users API Demo: Adds, Gets, Edits, Logs In & Out, and Deletes Users
 
 #### Running the tests in the ./tests/ directory
 
@@ -35,6 +40,10 @@ This is a collection of page objects which are designed to serve as subject matt
 The advantage of this style of automation is it enables us to more quickly fix broken tests. For example, if a button's reference is changed, we need to update the page object that defines that button rather than every script where that button is interacted with.
 
 #### ./tests/
-This is a collection of rspec tests organized around the test cases that might be written for this application. As both API and UI tests are supported, they are included in every test in the library. If you are running the repo using the command above, you will notice breaks in-between the UI tests, this is the API test execution.
+This is a collection of rspec testmoved demo -> demos/ui_demo.rb
+    * renamed to be clear that it is a demo path for the ui_demo
+
+contacts_api_demo.rb
+s organized around the test cases that might be written for this application. As both API and UI tests are supported, they are included in every test in the library. If you are running the repo using the command above, you will notice breaks in-between the UI tests, this is the API test execution.
 
 You will notice that each script is independent of every other script. This is intentional as the failure of one test won't cause a cascade effect. This means some functionality (in particular, login) will be duplicated throughout the testing process, but it is considered best practice as it limits false failures.

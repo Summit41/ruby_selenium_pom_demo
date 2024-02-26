@@ -1,10 +1,10 @@
 require 'selenium-webdriver'
 require 'rspec'
-require_relative './page_objects/login_page'
-require_relative './page_objects/register_page'
-require_relative './page_objects/home_page'
-require_relative './page_objects/add_contact_page'
-require_relative './page_objects/contact_details_page'
+require_relative '../page_objects/login_page'
+require_relative '../page_objects/register_page'
+require_relative '../page_objects/home_page'
+require_relative '../page_objects/add_contact_page'
+require_relative '../page_objects/contact_details_page'
 require 'date'
 
 # Test Data
